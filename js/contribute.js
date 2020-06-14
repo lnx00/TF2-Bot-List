@@ -42,5 +42,18 @@ function ConvertToJSON() {
 }
 
 function FindNewBots() {
+    let txtInput = $("#inputField").val();
 
+    $.get("./lists/botlist.txt", function (data) { // Yes, I should store this list somewhere once. But I don't want to.
+        let bots = data.split("\n");
+
+        for (let i = 0; i < bots.length; i++) {
+            let cBot = bots[i];
+            if (cBot.startsWith("//") || !cBot) {
+                continue;
+            }
+            let steamID = parseInt(cBot);
+            txtInput.replace(steamID, "");
+        }
+    });
 }
