@@ -3,13 +3,15 @@ $(document).ready(function () {
 });
 
 function LoadList() {
-    $.get("https://lnx00.github.io/TF2-Bot-List/lists/botlist.txt", function(data) {
+    $.get("./lists/botlist.txt", function(data) {
         let bots = data.split("\n");
 
         $("#botList").empty();
         for (let i = 0; i < bots.length; i++) {
-            if (bots[i].startsWith("//")) { continue; }
-            let botRow = "<li class='collection-item'>" + bots[i] + "</li>";
+            let cBot = bots[i];
+            if (cBot.startsWith("//") || !cBot) { continue; }
+
+            let botRow = `<li class="collection-item"><div>${cBot}<a href="https://steamcommunity.com/profiles/${cBot}" target="_blank" class="secondary-content"><i class="material-icons">launch</i></a></div></li>`;
             $("#botList").append(botRow);
         }
     });
