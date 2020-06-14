@@ -4,7 +4,7 @@ function DownloadJSON() {
     jsonObject.version = 2;
 
     let players = [];
-    $.get("./lists/botlist.txt", function (data) { // Yes, you could store this list somewhere once. But I don't want to.
+    $.get("./lists/botlist.txt", function (data) { // Yes, I should store this list somewhere once. But I don't want to.
         let bots = data.split("\n");
 
         for (let i = 0; i < bots.length; i++) {
