@@ -8,7 +8,7 @@
 <p>You can contribute to this list by creating an <a href="https://github.com/lnx00/TF2-Bot-List/issues/new" target="_blank">Issue</a> or a <a href="https://github.com/lnx00/TF2-Bot-List/pulls" target="_blank">Pull Request</a>.</p>
 
 <textarea id="inputField" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
-<button class="btn disabled" onclick="ConvertToTXT()">Convert to ID-List (TXT)</button>
-<button class="btn" onclick="ConvertToJSON()">Convert to TF2 Bot Detector (JSON)</button>
-<button class="btn" onclick="FindNewBots()">Find new Bots (From TXT)</button>
+<button class="btn disabled tooltipped" onclick="ConvertToTXT()" data-position="bottom" data-tooltip="Converts a given JSON to raw text">Convert to Raw Text (List)</button>
+<button class="btn tooltipped" onclick="ConvertToJSON()" data-position="bottom" data-tooltip="Converts a given raw list into JSON for use with TF2 Bot Detector">Convert to JSON (TF2 Bot Detector)</button>
+<button class="btn tooltipped" onclick="FindNewBots()" data-position="bottom" data-tooltip="Filters a given list and removes already known bots">Find new Bots (From TXT)</button>
 <script src="./js/contribute.js"></script>

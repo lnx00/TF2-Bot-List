@@ -1,3 +1,4 @@
+// TODO: This doesn't work
 function ConvertToTXT() {
     let txtOutput = "";
     let jsonInput = $("#inputField").val();
@@ -19,7 +20,7 @@ function ConvertToJSON() {
     let bots = txtInput.split("\n");
 
     let jsonObject = new Object();
-    jsonObject.$schema = "./schema/playerlist.schema.json";
+    jsonObject.$schema = "./schema/playerlist.schema.json"; // Yes, I should store this list somewhere once. But I don't want to.
     jsonObject.version = 2;
 
     let players = [];
@@ -28,7 +29,7 @@ function ConvertToJSON() {
         if (cBot.startsWith("//") || !cBot) {
             continue;
         }
-        let steamID3 = parseInt(cBot) ^ 0x110000100000000;
+        let steamID3 = parseInt(cBot) ^ 0x110000100000000; // Convert SteamID64 to SteamID3
 
         let cPlayer = new Object;
         cPlayer.attributes = ["cheater"];
@@ -44,7 +45,7 @@ function ConvertToJSON() {
 function FindNewBots() {
     let txtInput = $("#inputField").val();
 
-    $.get("./lists/botlist.txt", function (data) { // Yes, I should store this list somewhere once. But I don't want to.
+    $.get("./lists/botlist.txt", function (data) {
         let bots = data.split("\n");
 
         for (let i = 0; i < bots.length; i++) {
@@ -52,8 +53,11 @@ function FindNewBots() {
             if (cBot.startsWith("//") || !cBot) {
                 continue;
             }
-            let steamID = parseInt(cBot);
-            txtInput.replace(steamID, "");
+
+            txtInput = txtInput.replace(cBot, "");
         }
+        txtInput = txtInput.replace(/^\s*$(?:\r\n?|\n)/gm, ""); // Remove all empty lines
+
+        $("#inputField").val(txtInput);
     });
 }

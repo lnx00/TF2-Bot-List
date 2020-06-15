@@ -1,5 +1,36 @@
 <h2>Download</h2>
-<a class="btn" href="./lists/botlist.txt" download>TXT List with Steam IDs</a>
-<button class="btn" onclick="DownloadJSON()">JSON for TF2 Bot Detector</button>
-<button class="btn disabled">voice_ban.dt for TF2</button>
+<div class="row">
+    <a class="btn col s3" href="./lists/botlist.txt" download>TXT List with Steam IDs</a>
+    <button class="btn col s4 offset-s1" onclick="DownloadJSON()">JSON for TF2 Bot Detector</button>
+    <button class="btn col s3 offset-s1" onclick="DownloadVoiceBan()">voice_ban.dt for TF2</button>
+</div>
+
+<ul class="collapsible popout">
+    <li>
+        <div class="collapsible-header"><i class="material-icons">filter_alt</i>How to install JSON</div>
+        <div class="collapsible-body">
+            <ol class="collection">
+                <li class="collection-item">Make sure that <a href="https://github.com/PazerOP/tf2_bot_detector" target="_blank">TF2 Bot Detector</a> is installed correctly</li>
+                <li class="collection-item">Download <code>playerlist.tf2bl.json</code> by clicking the corresponding button above</li>
+                <li class="collection-item">Move <code>playerlist.tf2bl.json</code> into the <code>cfg</code> folder of TF2 Bot Detector</li>
+                <li class="collection-item">Run TF2 Bot Detector and make sure the console sais, that the file has been loaded</li>
+            </ol>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header"><i class="material-icons">voice_over_off</i>How to install Voice Ban file</div>
+        <div class="collapsible-body">
+            <ol class="collection">
+                <li class="collection-item">Download <code>voice_ban.dt</code> by clicking the corresponding button above</li>
+                <li class="collection-item">Find and open your <code>Team Fortress 2</code> game folder (Steam -> Properties -> Local Files -> Browse Local Files)</li>
+                <li class="collection-item">Move <code>voice_ban.dt</code> into the <code>tf</code> folder located inside your <code>Team Fortress 2</code> folder</li>
+            </ol>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header"><i class="material-icons">get_app</i>How to install TF2 Bot Detector</div>
+        <div class="collapsible-body"><span>TODO: This</span></div>
+    </li>
+</ul>
+
 <script src="./js/download.js"></script>
