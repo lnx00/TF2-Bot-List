@@ -15,13 +15,12 @@
     <button class="btn tooltipped col s5 offset-s1" onclick="FindNewBots()" data-position="bottom" data-tooltip="Filters a given SteamID64 list and removes already known bots">Find new Bots (From List)</button>
 
     <ul id='convertDropdown' class='dropdown-content'>
-        <li><a href="javascript:void()" onclick="ConvertToTXT()">To List (from JSON)</a></li>
-        <li><a href="javascript:void()" onclick="ConvertToTXT()">To List (from TF2 Bot Detector)</a></li>
-        <li><a href="javascript:void()" onclick="ConvertToTXT()">To JSON (from List)</a></li>
-        <li><a href="javascript:void()" onclick="ConvertToTXT()">To JSON (from TF2 Bot Detector)</a></li>
-        <li><a href="javascript:void()" onclick="ConvertToTXT()">To TF2 Bot Detector (from List)</a></li>
-        <li><a href="javascript:void()" onclick="ConvertToTXT()">To TF2 Bot Detector (from JSON)</a></li>
+        <li><a href="javascript:void()" onclick="ConvertListToJSON()">To JSON (from List)</a></li>
+        <li><a href="javascript:void()" onclick="ConvertTF2BToJSON()">To JSON (from TF2 Bot Detector)</a></li>
+        <li><a href="javascript:void()" onclick="ConvertListToTF2B()">To TF2 Bot Detector (from List)</a></li>
+        <li><a href="javascript:void()" onclick="ConvertJSONToTF2B()">To TF2 Bot Detector (from JSON)</a></li>
     </ul>
 </div>
 
+<script src="./js/DataTools.js"></script>
 <script src="./js/contribute.js"></script>

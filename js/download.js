@@ -16,7 +16,7 @@ function DownloadJSON() {
 
             let cPlayer = new Object;
             cPlayer.attributes = ["cheater"];
-            cPlayer.steamid = ID64toID3(cBot);
+            cPlayer.steamid = ID64toID3(cID);
             players.push(cPlayer);
         }
 
