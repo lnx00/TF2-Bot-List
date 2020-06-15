@@ -42,13 +42,14 @@ function IsValidID3(id) {
 
 // Converts SteamID3 to SteamID64
 function ID3toID64(id) {
-    // TODO: I don't know how
-    return "MISSING-CONVERSION"
+    let id64 = parseInt(id.substring(5, id.length - 1)) + 76561197960265728;
+    console.log(id.substring(5, id.length - 1) + " - " + id.substring(5, id.length - 1));
+    return id64;
 }
 
 // Converts SteamID64 to SteamID3
 function ID64toID3(id64) {
-    let id3 = "[U:1:" + (parseInt(id64) ^ 0x110000100000000).toString() + "]";
+    let id3 = "[U:1:" + BigInt(parseInt(id64) ^ 0x110000100000000).toString() + "]";
     return id3;
 }
 
