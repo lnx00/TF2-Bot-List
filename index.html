@@ -11,9 +11,11 @@
 
 <body>
 
+    <!-- Navbar -->
     <nav>
         <div class="nav-wrapper indigo">
             <a href="javascript:void()" onclick="LoadPage('home')" class="brand-logo">&nbspTF2 Bot List</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="javascript:void()" onclick="LoadPage('home')"><i class="material-icons">home</i></a></li>
                 <li><a href="javascript:void()" onclick="LoadPage('list')">List</a></li>
@@ -22,6 +24,14 @@
             </ul>
         </div>
     </nav>
+
+    <!-- Sidenav for Mobile -->
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="javascript:void()" onclick="LoadPage('home')">Home</a></li>
+        <li><a href="javascript:void()" onclick="LoadPage('list')">List</a></li>
+        <li><a href="javascript:void()" onclick="LoadPage('download')">Download</a></li>
+        <li><a href="javascript:void()" onclick="LoadPage('contribute')">Contribute</a></li>
+    </ul>
 
     <div id="content" class="container">
 
