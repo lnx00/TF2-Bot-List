@@ -9,7 +9,6 @@ function LoadPage(name) {
     $("#content").load("./pages/" + name + ".html", function () {
         InitPage();
     });
-    //window.history.pushState("", "", "/" + name + ".html");
 }
 
 function InitPage() {

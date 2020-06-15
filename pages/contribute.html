@@ -7,8 +7,21 @@
 <h2>Contribute</h2>
 <p>You can contribute to this list by creating an <a href="https://github.com/lnx00/TF2-Bot-List/issues/new" target="_blank">Issue</a> or a <a href="https://github.com/lnx00/TF2-Bot-List/pulls" target="_blank">Pull Request</a>.</p>
 
+<hr/>
+<h4><i class="material-icons">build</i>&nbspTools</h4>
 <textarea id="inputField" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
-<button class="btn disabled tooltipped" onclick="ConvertToTXT()" data-position="bottom" data-tooltip="Converts a given JSON to raw text">Convert to Raw Text (List)</button>
-<button class="btn tooltipped" onclick="ConvertToJSON()" data-position="bottom" data-tooltip="Converts a given raw list into JSON for use with TF2 Bot Detector">Convert to JSON (TF2 Bot Detector)</button>
-<button class="btn tooltipped" onclick="FindNewBots()" data-position="bottom" data-tooltip="Filters a given list and removes already known bots">Find new Bots (From TXT)</button>
+<div class="row">
+    <button class='dropdown-trigger btn col s6' data-target='convertDropdown'>Convert</a>
+    <button class="btn tooltipped col s5 offset-s1" onclick="FindNewBots()" data-position="bottom" data-tooltip="Filters a given SteamID64 list and removes already known bots">Find new Bots (From List)</button>
+
+    <ul id='convertDropdown' class='dropdown-content'>
+        <li><a href="javascript:void()" onclick="ConvertToTXT()">To List (from JSON)</a></li>
+        <li><a href="javascript:void()" onclick="ConvertToTXT()">To List (from TF2 Bot Detector)</a></li>
+        <li><a href="javascript:void()" onclick="ConvertToTXT()">To JSON (from List)</a></li>
+        <li><a href="javascript:void()" onclick="ConvertToTXT()">To JSON (from TF2 Bot Detector)</a></li>
+        <li><a href="javascript:void()" onclick="ConvertToTXT()">To TF2 Bot Detector (from List)</a></li>
+        <li><a href="javascript:void()" onclick="ConvertToTXT()">To TF2 Bot Detector (from JSON)</a></li>
+    </ul>
+</div>
+
 <script src="./js/contribute.js"></script>

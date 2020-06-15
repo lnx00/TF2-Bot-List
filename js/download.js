@@ -9,20 +9,19 @@ function DownloadJSON() {
         let bots = data.split("\n");
 
         for (let i = 0; i < bots.length; i++) {
-            let cBot = bots[i];
-            if (cBot.startsWith("//") || !cBot) {
+            let cID = bots[i];
+            if (cID.startsWith("//") || !cID) {
                 continue;
             }
-            let steamID3 = parseInt(cBot) ^ 0x110000100000000;
 
             let cPlayer = new Object;
             cPlayer.attributes = ["cheater"];
-            cPlayer.steamid = "[U:1:" + steamID3 + "]";
+            cPlayer.steamid = ID64toID3(cBot);
             players.push(cPlayer);
         }
 
         jsonObject.players = players;
-        let jsonString = JSON.stringify(jsonObject, null, 3);
+        let jsonString = JSON.stringify(jsonObject, null, 3); // Convert to formatted JSON
         DownloadFile("playerlist.tf2bl.json", jsonString);
     });
 }
@@ -48,8 +47,7 @@ function DownloadVoiceBan() {
                 continue;
             }
 
-            let cSteamId = parseInt(data[i]) ^ 0x110000100000000;
-            let cSteamId3 = "[U:1:" + cSteamId + "]";
+            let cSteamId3 = ID64toID3(data[i]);
 
             for (let j = 0; j < 32; j++) { // For each char of id (max 32)
                 if (cSteamId3.charCodeAt(j)) { // Check if char at j exist
@@ -70,34 +68,6 @@ function DownloadVoiceBan() {
         index++;
         vbFile[index] = 0x00;
 
-        DownloadBinFile(vbFile);
+        DownloadBinFile("voice_ban.dt", vbFile);
     });
-}
-
-// Download simple text files
-function DownloadFile(filename, content) {
-    let dlElement = document.createElement("a");
-    dlElement.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
-    dlElement.setAttribute('download', filename);
-
-    dlElement.style.display = 'none';
-    document.body.appendChild(dlElement);
-
-    dlElement.click();
-
-    document.body.removeChild(dlElement);
-}
-
-// Download complex binary files
-function DownloadBinFile(resultByte) {
-    var bytes = new Uint8Array(resultByte);
-
-    var blob = new Blob([bytes], {
-        type: "application/octet-stream"
-    });
-
-    var dlElement = document.createElement('a');
-    dlElement.href = window.URL.createObjectURL(blob);
-    dlElement.download = "voice_ban.dt";
-    dlElement.click();
 }
