@@ -37,3 +37,13 @@ function ConvertTF2BToJSON() {
     let txtInput = $("#inputField").val();
     $("#inputField").val(TF2BToJSON(txtInput));
 }
+
+function ConvertTF2BToList() {
+    let txtInput = $("#inputField").val();
+    $("#inputField").val(TF2BToList(txtInput));
+}
+
+function ConvertJSONToList() {
+    let txtInput = $("#inputField").val();
+    $("#inputField").val(TF2BToList(txtInput));
+}

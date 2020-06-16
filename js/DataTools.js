@@ -1,4 +1,4 @@
-// Download simple Test-File
+// Downloads a simple Text-File
 function DownloadFile(filename, content) {
     let dlElement = document.createElement("a");
     dlElement.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
@@ -12,7 +12,7 @@ function DownloadFile(filename, content) {
     //document.body.removeChild(dlElement);
 }
 
-// Download binary File
+// Downloads a binary File
 function DownloadBinFile(filename, data) {
     let bytes = new Uint8Array(data);
 
@@ -26,11 +26,13 @@ function DownloadBinFile(filename, data) {
     dlElement.click();
 }
 
+// Checks if an id is valid
 function IsValidID(id) {
     if (!id) { return false; }
     return (/^\d*$/).test(id);
 }
 
+// Checks if an Steam ID 3 is valid
 function IsValidID3(id) {
     if (!id) { return false; }
     return (/\[U:1:\d*]/).test(id);
@@ -97,7 +99,7 @@ function ListToTF2B(list) {
     return JSON.stringify(jsonObject, null, 3);
 }
 
-// Converts List to TF2B
+// Converts List to TF2 Bot Detector
 function JSONToTF2B(json) {
     if (!json) { return ""; }
 
@@ -109,6 +111,7 @@ function JSONToTF2B(json) {
     let players = [];
     for (let i = 0; i < jsonObject.botList.length; i++) {
         let cID = jsonObject.botList[i].id;
+        if (!IsValidID(cID)) { continue; }
 
         let cPlayer = new Object;
         cPlayer.attributes = ["cheater"];
@@ -120,6 +123,7 @@ function JSONToTF2B(json) {
     return JSON.stringify(tf2bObject, null, 3);
 }
 
+// Converts TF2 Bot Detector to JSON
 function TF2BToJSON(json) {
     if (!json) { return ""; }
 
@@ -129,13 +133,46 @@ function TF2BToJSON(json) {
     let botList = [];
     for (let i = 0; i < tf2bObject.players.length; i++) {
         let cID = tf2bObject.players[i].steamid;
+        if (!IsValidID3(cID)) { continue; }
 
         let cPlayer = new Object;
         cPlayer.attributes = ["cheater"];
         cPlayer.steamid = ID3toID64(cID);
-        players.push(cPlayer);
+        botList.push(cPlayer);
     }
 
     jsonObject.botList = botList;
     return JSON.stringify(jsonObject, null, 3);
+}
+
+// Converts JSON to List
+function JSONToList(json) {
+    if (!json) { return ""; }
+
+    let jsonObject = JSON.parse(json);
+    let botList = "";
+    for (let i = 0; i < jsonObject.botList.length; i++) {
+        let cID = jsonObject.botList[i].id;
+        if (!IsValidID(cID)) { continue; }
+
+        botList += cID + "\n";
+    }
+
+    return botList.substring(botList.length - 1);
+}
+
+// Converts TF2 Bot Detector to List
+function TF2BToList(json) {
+    if (!json) { return ""; }
+
+    let tf2bObject = JSON.parse(json);
+    let botList = "";
+    for (let i = 0; i < tf2bObject.players.length; i++) {
+        let cID = tf2bObject.players[i].steamid;
+        if (!IsValidID3(cID)) { continue; }
+
+        botList += ID3toID64(cID) + "\n";
+    }
+
+    return botList.substring(botList.length - 1);
 }
