@@ -1,8 +1,8 @@
 // Create and Download playerlist.tf2bl.json
 function DownloadJSON() {
     let jsonObject = new Object();
-    jsonObject.$schema = "./schema/playerlist.schema.json";
-    jsonObject.version = 2;
+    jsonObject.$schema = TF2B_SHEMA;
+    //jsonObject.version = 2;
 
     let players = [];
     $.get("./lists/botlist.txt", function (data) { // Yes, I should store this list somewhere once. But I don't want to.

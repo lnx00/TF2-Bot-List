@@ -42,6 +42,8 @@ function IsValidID3(id) {
 /*   CONVERSION   */
 /******************/
 
+const TF2B_SHEMA = "https://raw.githubusercontent.com/PazerOP/tf2_bot_detector/master/schemas/v3/playerlist.schema.json";
+
 // Converts SteamID3 to SteamID64
 function ID3toID64(id) {
     let id64 = (BigInt(id.substring(5, id.length - 1)) + 76561197960265728n).toString();
@@ -79,8 +81,8 @@ function ListToTF2B(list) {
 
     let listLines = list.replace("\r", "").split("\n");
     let jsonObject = new Object();
-    jsonObject.$schema = "./schema/playerlist.schema.json";
-    jsonObject.version = 2;
+    jsonObject.$schema = TF2B_SHEMA;
+    //jsonObject.version = 2;
 
     let players = [];
     for (let i = 0; i < listLines.length; i++) {
@@ -105,8 +107,8 @@ function JSONToTF2B(json) {
 
     let jsonObject = JSON.parse(json);
     let tf2bObject = new Object();
-    tf2bObject.$schema = "./schema/playerlist.schema.json";
-    tf2bObject.version = 2;
+    tf2bObject.$schema = TF2B_SHEMA;
+    //tf2bObject.version = 2;
     
     let players = [];
     for (let i = 0; i < jsonObject.botList.length; i++) {
@@ -158,7 +160,7 @@ function JSONToList(json) {
         botList += cID + "\n";
     }
 
-    return botList.substring(botList.length - 1);
+    return botList.substring(0, botList.length - 1);
 }
 
 // Converts TF2 Bot Detector to List
@@ -174,5 +176,5 @@ function TF2BToList(json) {
         botList += ID3toID64(cID) + "\n";
     }
 
-    return botList.substring(botList.length - 1);
+    return botList.substring(0, botList.length - 1);
 }

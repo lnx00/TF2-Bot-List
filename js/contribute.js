@@ -1,5 +1,6 @@
 function FindNewBots() {
     let txtInput = $("#inputField").val();
+    let txtOutput = "";
 
     $.get("./lists/botlist.txt", function (data) {
         let bots = data.split("\n");
@@ -11,8 +12,12 @@ function FindNewBots() {
             }
 
             txtInput = txtInput.replace(cBot, "");
+            /*if (!txtInput.includes(cBot)) {
+                txtOutput += cBot + "\n";
+            }*/
         }
         txtInput = txtInput.replace(/^\s*$(?:\r\n?|\n)/gm, ""); // Remove all empty lines
+        //txtInput = txtInput.replace(/^\D*$/g, ""); // Remove all non-ID lines
 
         $("#inputField").val(txtInput);
     });
@@ -45,5 +50,5 @@ function ConvertTF2BToList() {
 
 function ConvertJSONToList() {
     let txtInput = $("#inputField").val();
-    $("#inputField").val(TF2BToList(txtInput));
+    $("#inputField").val(JSONToList(txtInput));
 }
