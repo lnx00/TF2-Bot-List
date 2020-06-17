@@ -1,3 +1,7 @@
+const ID_REGEX = /(?=.)^\d*$/;
+//const ID_REGEX = /(^$)|(^\d+$)/
+const ID3_REGEX = /\[U:1:\d*]/;
+
 // Downloads a simple Text-File
 function DownloadFile(filename, content) {
     let dlElement = document.createElement("a");
@@ -29,13 +33,21 @@ function DownloadBinFile(filename, data) {
 // Checks if an id is valid
 function IsValidID(id) {
     if (!id) { return false; }
-    return (/^\d*$/).test(id);
+    return (ID_REGEX).test(id);
 }
 
 // Checks if an Steam ID 3 is valid
 function IsValidID3(id) {
     if (!id) { return false; }
-    return (/\[U:1:\d*]/).test(id);
+    return (ID3_REGEX).test(id);
+}
+
+// Filters a list and removes all non-ID lines
+function FilterList(list) {
+    if (!list) { return []; }
+    let listArray = list.replace("\r", "").split("\n");
+    let filteredList = listArray.filter(x => x.match(ID_REGEX));
+    return filteredList;
 }
 
 /*******************/
@@ -61,11 +73,12 @@ function ListToJSON(list) {
     if (!list) { return ""; };
 
     let jsonObject = new Object();
-    let listLines = list.replace("\r", "").split("\n");
+    //let listLines = list.replace("\r", "").split("\n");
+    let listLines = FilterList(list);
 
     let botArray = [];
     for (let i = 0; i < listLines.length; i++) {
-        if (!IsValidID(listLines[i])) { continue; }
+        if (!listLines[i]) { continue; }
         let botItem = new Object();
         botItem.id = listLines[i];
         botArray.push(botItem);
@@ -79,16 +92,15 @@ function ListToJSON(list) {
 function ListToTF2B(list) {
     if (!list) { return ""; };
 
-    let listLines = list.replace("\r", "").split("\n");
+    //let listLines = list.replace("\r", "").split("\n");
+    let listLines = FilterList(list);
     let jsonObject = new Object();
     jsonObject.$schema = TF2B_SHEMA;
 
     let players = [];
     for (let i = 0; i < listLines.length; i++) {
         let cID = listLines[i];
-        if (cID.startsWith("//") || !cID) {
-            continue;
-        }
+        if (!cID) { continue; }
 
         let cPlayer = new Object;
         cPlayer.attributes = ["cheater"];
@@ -174,13 +186,4 @@ function TF2BToList(json) {
     }
 
     return botList.substring(0, botList.length - 1);
-}
-
-
-
-
-function Test() {
-    $.get("https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw", function(data) {
-        console.log(data);
-    });
 }

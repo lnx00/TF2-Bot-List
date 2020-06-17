@@ -1,11 +1,7 @@
 // Create and Download playerlist.tf2bl.json
 function DownloadJSON() {
-    let jsonObject = new Object();
-    jsonObject.$schema = TF2B_SHEMA;
-
-    let players = [];
-    $.get("./lists/botlist.txt", function (data) { // Yes, I should store this list somewhere once. But I don't want to.
-        let bots = data.split("\n");
+    $.get("https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw", function (data) { // Yes, I should store this list somewhere once. But I don't want to.
+        /*let bots = data.split("\n");
 
         for (let i = 0; i < bots.length; i++) {
             let cID = bots[i];
@@ -20,17 +16,20 @@ function DownloadJSON() {
         }
 
         jsonObject.players = players;
-        let jsonString = JSON.stringify(jsonObject, null, 3); // Convert to formatted JSON
-        DownloadFile("playerlist.tf2bl.json", jsonString);
+        let jsonString = JSON.stringify(jsonObject, null, 3); // Convert to formatted JSON*/
+        let jsonString = ListToTF2B(data);
+        if (jsonString) { DownloadFile("playerlist.tf2bl.json", jsonString); }
+    }).catch(function() {
+        
     });
 }
 
 // Create and Download voice_ban.dt
 function DownloadVoiceBan() {
-    $.get("./lists/botlist.txt", function (data) {
-        data = data.replace("\r", "");
-        data = data.split("\n");
-        let fileLength = 32 * data.length + 4; // Calculate file size
+    $.get("https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw", function (data) {
+        if (!data) { return; }
+        let botList = FilterList(data);
+        let fileLength = 32 * botList.length + 4; // Calculate file size
 
         let vbFile = new Uint8Array(fileLength);
         vbFile[0] = 0x01;
@@ -39,14 +38,14 @@ function DownloadVoiceBan() {
         vbFile[3] = 0x00;
 
         let index = 4;
-        for (let i = 0; i < data.length; i++) {
-            let cLine = data[i];
+        for (let i = 0; i < botList.length; i++) {
+            let cLine = botList[i];
 
             if (cLine.startsWith("//") || !cLine) {
                 continue;
             }
 
-            let cSteamId3 = ID64toID3(data[i]);
+            let cSteamId3 = ID64toID3(botList[i]);
 
             for (let j = 0; j < 32; j++) { // For each char of id (max 32)
                 if (cSteamId3.charCodeAt(j)) { // Check if char at j exist
@@ -67,6 +66,13 @@ function DownloadVoiceBan() {
         index++;
         vbFile[index] = 0x00;
 
+        console.log(botList);
         DownloadBinFile("voice_ban.dt", vbFile);
+    }).catch(function() {
+        Swal.fire({
+            title: "Error",
+            text: "Could not connect to CORS Proxy",
+            icon: "error"
+        });
     });
 }
