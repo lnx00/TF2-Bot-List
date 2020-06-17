@@ -2,7 +2,7 @@ const TF2B_FILE_REGEX = /(tf2_bot_detector_).*(\.zip)/
 
 // Filter and Download botList.txt
 function DownloadList() {
-    $.get("https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw", function (data) {
+    $.get(BOT_LIST_URL, function (data) {
         let botList = FilterList(data);
         let listText = "";
         for (let i = 0; i < botList.length; i++) {
@@ -20,7 +20,7 @@ function DownloadList() {
 
 // Create and Download playerlist.tf2bl.json
 function DownloadJSON() {
-    $.get("https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw", function (data) {
+    $.get(BOT_LIST_URL, function (data) {
         let jsonString = ListToTF2B(data);
         if (jsonString) { DownloadFile("playerlist.tf2bl.json", jsonString); }
     }).catch(function() {
@@ -34,7 +34,7 @@ function DownloadJSON() {
 
 // Create and Download voice_ban.dt
 function DownloadVoiceBan() {
-    $.get("https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw", function (data) {
+    $.get(BOT_LIST_URL, function (data) {
         if (!data) { return; }
         let botList = FilterList(data);
         let fileLength = 32 * botList.length + 4; // Calculate file size

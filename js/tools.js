@@ -1,26 +1,12 @@
 function FindNewBots() {
     let txtInput = $("#inputField").val();
+    let botList = FilterList(txtInput);
     let txtOutput = "";
 
-    $.get("./lists/botlist.txt", function (data) {
-        //let bots = data.split("\n");
-        let bots = FileList(data);
-
-        for (let i = 0; i < bots.length; i++) {
-            let cBot = bots[i];
-            if (cBot.startsWith("//") || !cBot) {
-                continue;
-            }
-
-            txtInput = txtInput.replace(cBot, "");
-            /*if (!txtInput.includes(cBot)) {
-                txtOutput += cBot + "\n";
-            }*/
-        }
-        txtInput = txtInput.replace(/^\s*$(?:\r\n?|\n)/gm, ""); // Remove all empty lines
-        //txtInput = txtInput.replace(/^\D*$/g, ""); // Remove all non-ID lines
-
-        $("#inputField").val(txtInput);
+    $.get(BOT_LIST_URL, function (data) {
+        let dlBotList = FilterList(data);
+        let diffArray = botList.filter(x => !dlBotList.includes(x));
+        $("#inputField").val(ArrayToList(diffArray));
     });
 }
 

@@ -1,6 +1,6 @@
 const ID_REGEX = /(?=.)^\d*$/;
-//const ID_REGEX = /(^$)|(^\d+$)/
 const ID3_REGEX = /\[U:1:\d*]/;
+const BOT_LIST_URL = "https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw";
 
 // Downloads a simple Text-File
 function DownloadFile(filename, content) {
@@ -57,6 +57,16 @@ function FilterList(list) {
 /******************/
 
 const TF2B_SHEMA = "https://raw.githubusercontent.com/PazerOP/tf2_bot_detector/master/schemas/v3/playerlist.schema.json";
+
+// Created a string list of an Array
+function ArrayToList(array) {
+    if (!array) { return ""; }
+    let retString = "";
+    for (let i = 0; i < array.length; i++) {
+        retString += array[i] + ((i < array.length - 1) ? "\n" : "");
+    }
+    return retString;
+}
 
 // Converts SteamID3 to SteamID64
 function ID3toID64(id) {
