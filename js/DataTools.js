@@ -5,8 +5,8 @@ const ID3_REGEX = /\[U:1:\d*]/;
 // Downloads a simple Text-File
 function DownloadFile(filename, content) {
     let dlElement = document.createElement("a");
-    dlElement.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
-    dlElement.setAttribute('download', filename);
+    dlElement.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(content));
+    dlElement.setAttribute("download", filename);
     dlElement.click();
 }
 
@@ -21,6 +21,14 @@ function DownloadBinFile(filename, data) {
     let dlElement = document.createElement("a");
     dlElement.setAttribute("href", window.URL.createObjectURL(blob));
     dlElement.setAttribute("download", filename);
+    dlElement.click();
+}
+
+// Download file from URL
+function DownloadURLFile(url) {
+    let dlElement = document.createElement("a");
+    dlElement.setAttribute("href", url);
+    dlElement.setAttribute("download", true);
     dlElement.click();
 }
 

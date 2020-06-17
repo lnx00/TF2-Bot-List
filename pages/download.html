@@ -1,9 +1,17 @@
-<h2>Download</h2>
-<p>This will download the latest <a href="https://gist.github.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9">Bot List by wgetJane</a> and convert it for further use</p>
+<style>
+    .dlBtn {
+        padding-left: 50px;
+    }
+</style>
+<h2>Downloads</h2>
+<p>This will download the latest <a href="https://gist.github.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9" target="_blank">Bot List by wgetJane</a> and convert it for further use</p>
 <div class="row">
-    <button class="btn col s4" onclick="DownloadList()">TXT List with Steam IDs</a>
-    <button class="btn col s4" onclick="DownloadJSON()">JSON for TF2 Bot Detector</button>
-    <button class="btn col s4" onclick="DownloadVoiceBan()">voice_ban.dt for TF2</button>
+    <button class="btn col s4 dlBtn" onclick="DownloadList()">TXT List with Steam IDs</a>
+    <button class="btn col s4 dlBtn" onclick="DownloadJSON()">JSON for TF2 Bot Detector</button>
+    <button class="btn col s4 dlBtn" onclick="DownloadVoiceBan()">voice_ban.dt for TF2</button>
+</div>
+<div class="row">
+    <button class="btn col s12" onclick="DownloadTF2B()">Download the latest TF2 Bot Detector by Pazer</button>
 </div>
 
 <ul class="collapsible popout">
@@ -30,7 +38,25 @@
     </li>
     <li>
         <div class="collapsible-header"><i class="material-icons">get_app</i>How to install TF2 Bot Detector</div>
-        <div class="collapsible-body"><span>TODO: This</span></div>
+        <div class="collapsible-body">
+            <ol class="collection">
+                <li class="collection-item"><a href="javascript:void()" onclick="DownloadTF2B()">Download the latest TF2 Bot Detector by Pazer</a> or <a href="https://github.com/PazerOP/tf2_bot_detector/releases" target="_blank">view all releases</a></li>
+                <li class="collection-item">Extract <code>tf2_bot_detector_XXXX.zip</code> into your desired folder (not your TF2 Game Folder)</li>
+                <li class="collection-item">Run <code>tf2_bot_detector.exe</code> and follow the on-screen instructions</li>
+                <li class="collection-item">The program should now look like <a href="https://i.imgur.com/8rOrWEM.png" target="_blank">this</a></li>
+            </ol>
+            <hr/> <!-- Small FAQ for our friends before they join the Discord :) -->
+            <b>I don't have <code>tf2_bot_detector.exe</code> / What do I have to do with Visual Studio?</b>
+            <p>If you don't have <code>tf2_bot_detector.exe</code> or Visual Studio is opening then you downloaded the wrong file.<br/>
+            Make sure that you download <code>tf2_bot_detector_XXXX.zip</code> and nothing else (eg. symbols.zip)<br/>
+            You can also <a href="javascript:void()" onclick="DownloadTF2B()">download the latest Version automatically</a>. Make sure to wait a moment if the download isn't starting immediately.</p>
+            <hr/>
+            <b>The program says that <code>VCRUNTIME140_1.dll</code> was not found</b>
+            <p>You are most probably missing Microsoft Visual C++ Redistributable for Visual Studio 2015, 2017 and 2019. You can download it <a href="https://aka.ms/vs/16/release/vc_redist.x64.exe" target="_blank">here</a>.<br/>
+            Simply run the installer and follow the on-screen instructions.</p>
+            <b>I have another problem that is not listed here</b>
+            <p>In this case you can either <a href="https://discord.gg/W8ZSh3Z" target="_blank">join the Discord</a> or <a href="https://github.com/PazerOP/tf2_bot_detector/issues" target="_blank">create an Issue on GitHub</a>.</p>
+        </div>
     </li>
 </ul>
 

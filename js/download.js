@@ -1,8 +1,14 @@
+const TF2B_FILE_REGEX = /(tf2_bot_detector_).*(\.zip)/
+
 // Filter and Download botList.txt
 function DownloadList() {
     $.get("https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw", function (data) {
         let botList = FilterList(data);
-        if (botList) { DownloadFile("botList.txt", botList); }
+        let listText = "";
+        for (let i = 0; i < botList.length; i++) {
+            listText += botList[i] + ((i < botList.length - 1) ? "\n" : "");
+        }
+        if (botList) { DownloadFile("botList.txt", listText); }
     }).catch(function() {
         Swal.fire({
             title: "Error",
@@ -74,6 +80,35 @@ function DownloadVoiceBan() {
         Swal.fire({
             title: "Error",
             text: "Connection to CORS Proxy failed",
+            icon: "error"
+        });
+    });
+}
+
+// Download the latest TF2 Bot Detector zip because GitHub is too complicated for many people
+function DownloadTF2B() {
+    $.get("https://api.github.com/repos/PazerOP/tf2_bot_detector/releases", function (data) {
+        let jsonObject = data;
+        let latestRelease = jsonObject[0];
+        let latestAssets = latestRelease.assets;
+
+        // Find correct zip file
+        let downloadURL;
+        for (let i = 0; i < latestAssets.length; i++) {
+            let fileName = latestAssets[i].name;
+            if (TF2B_FILE_REGEX.test(fileName)) {
+                downloadURL = latestAssets[i].browser_download_url;
+                break;
+            }
+        }
+
+        if (downloadURL) {
+            DownloadURLFile(downloadURL);
+        }
+    }).catch(function() {
+        Swal.fire({
+            title: "Error",
+            html: "Connection to GitHub Api failed.<br/>You can still download TF2 Bot Detector manually:<br/><a href='https://github.com/PazerOP/tf2_bot_detector/releases' target='_blank'>View Releases</a>",
             icon: "error"
         });
     });
