@@ -52,3 +52,8 @@ function ConvertJSONToList() {
     let txtInput = $("#inputField").val();
     $("#inputField").val(JSONToList(txtInput));
 }
+
+function UpdateShema() {
+    let txtInput = $("#inputField").val();
+    $("#inputField").val(JSONToTF2B(TF2BToJSON(txtInput))); // This doesn't work and I don't know why...
+}

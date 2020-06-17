@@ -82,7 +82,6 @@ function ListToTF2B(list) {
     let listLines = list.replace("\r", "").split("\n");
     let jsonObject = new Object();
     jsonObject.$schema = TF2B_SHEMA;
-    //jsonObject.version = 2;
 
     let players = [];
     for (let i = 0; i < listLines.length; i++) {
@@ -108,7 +107,6 @@ function JSONToTF2B(json) {
     let jsonObject = JSON.parse(json);
     let tf2bObject = new Object();
     tf2bObject.$schema = TF2B_SHEMA;
-    //tf2bObject.version = 2;
     
     let players = [];
     for (let i = 0; i < jsonObject.botList.length; i++) {
@@ -138,8 +136,7 @@ function TF2BToJSON(json) {
         if (!IsValidID3(cID)) { continue; }
 
         let cPlayer = new Object;
-        cPlayer.attributes = ["cheater"];
-        cPlayer.steamid = ID3toID64(cID);
+        cPlayer.id = ID3toID64(cID);
         botList.push(cPlayer);
     }
 
@@ -177,4 +174,13 @@ function TF2BToList(json) {
     }
 
     return botList.substring(0, botList.length - 1);
+}
+
+
+
+
+function Test() {
+    $.get("https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw", function(data) {
+        console.log(data);
+    });
 }
