@@ -1,26 +1,28 @@
+// Filter and Download botList.txt
+function DownloadList() {
+    $.get("https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw", function (data) {
+        let botList = FilterList(data);
+        if (botList) { DownloadFile("botList.txt", botList); }
+    }).catch(function() {
+        Swal.fire({
+            title: "Error",
+            text: "Connection to CORS Proxy failed",
+            icon: "error"
+        });
+    });
+}
+
 // Create and Download playerlist.tf2bl.json
 function DownloadJSON() {
-    $.get("https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw", function (data) { // Yes, I should store this list somewhere once. But I don't want to.
-        /*let bots = data.split("\n");
-
-        for (let i = 0; i < bots.length; i++) {
-            let cID = bots[i];
-            if (cID.startsWith("//") || !cID) {
-                continue;
-            }
-
-            let cPlayer = new Object;
-            cPlayer.attributes = ["cheater"];
-            cPlayer.steamid = ID64toID3(cID);
-            players.push(cPlayer);
-        }
-
-        jsonObject.players = players;
-        let jsonString = JSON.stringify(jsonObject, null, 3); // Convert to formatted JSON*/
+    $.get("https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw", function (data) {
         let jsonString = ListToTF2B(data);
         if (jsonString) { DownloadFile("playerlist.tf2bl.json", jsonString); }
     }).catch(function() {
-        
+        Swal.fire({
+            title: "Error",
+            text: "Connection to CORS Proxy failed",
+            icon: "error"
+        });
     });
 }
 
@@ -49,9 +51,9 @@ function DownloadVoiceBan() {
 
             for (let j = 0; j < 32; j++) { // For each char of id (max 32)
                 if (cSteamId3.charCodeAt(j)) { // Check if char at j exist
-                    vbFile[index] = cSteamId3.charCodeAt(j); // Push char to file
+                    vbFile[index] = cSteamId3.charCodeAt(j); // Add char at [j] to file
                 } else {
-                    vbFile[index] = 0x00; // Push 0x00 to file
+                    vbFile[index] = 0x00; // Add 0x00 at [j] to file
                 }
                 index++;
             }
@@ -71,7 +73,7 @@ function DownloadVoiceBan() {
     }).catch(function() {
         Swal.fire({
             title: "Error",
-            text: "Could not connect to CORS Proxy",
+            text: "Connection to CORS Proxy failed",
             icon: "error"
         });
     });

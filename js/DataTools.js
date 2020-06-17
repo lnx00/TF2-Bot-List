@@ -7,13 +7,7 @@ function DownloadFile(filename, content) {
     let dlElement = document.createElement("a");
     dlElement.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
     dlElement.setAttribute('download', filename);
-
-    //dlElement.style.display = 'none';
-    //document.body.appendChild(dlElement);
-
     dlElement.click();
-
-    //document.body.removeChild(dlElement);
 }
 
 // Downloads a binary File
