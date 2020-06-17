@@ -4,8 +4,9 @@ $(document).ready(function () {
 
 function LoadList() {
     $("#progressBar").show();
-    $.get("./lists/botlist.txt", function(data) {
-        let bots = data.split("\n");
+    $.get("https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw", function(data) {
+        //let bots = data.split("\n");
+        let bots = FilterList(bots);
 
         $("#botList").empty();
         for (let i = 0; i < bots.length; i++) {

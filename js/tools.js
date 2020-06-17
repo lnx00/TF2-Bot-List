@@ -3,7 +3,8 @@ function FindNewBots() {
     let txtOutput = "";
 
     $.get("./lists/botlist.txt", function (data) {
-        let bots = data.split("\n");
+        //let bots = data.split("\n");
+        let bots = FileList(data);
 
         for (let i = 0; i < bots.length; i++) {
             let cBot = bots[i];
