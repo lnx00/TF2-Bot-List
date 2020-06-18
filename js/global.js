@@ -1,8 +1,15 @@
-$(document).ready(function () {
-    // Init Materialize
+const darkMode = new Darkmode({
+    saveInCookies: true,
+    label: "💡",
+    autoMatchOsTheme: false
+});
 
+$(document).ready(function () {
     // Load Home Page
     LoadPage("home");
+
+    // Init Dark Mode
+    darkMode.showWidget();
 });
 
 // Use CORS Proxy for Ajax
