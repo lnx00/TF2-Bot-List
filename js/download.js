@@ -1,4 +1,4 @@
-const TF2B_FILE_REGEX = /(tf2_bot_detector_).*(\.zip)/
+const TF2B_FILE_REGEX = /(tf2_bot_detector_).*(x64).*(\.zip)/
 
 // Filter and Download botList.txt
 function DownloadList() {
