@@ -44,3 +44,23 @@ function UpdateShema() {
     let txtInput = $("#inputField").val();
     $("#inputField").val(JSONToTF2B(TF2BToJSON(txtInput))); // This doesn't work and I don't know why...
 }
+
+function ConvertTo3() {
+    let txtInput = $("#inputField").val();
+    let listArray = txtInput.replace("\r", "").split("\n");
+    let outputArray = [];
+    for (let i = 0; i < listArray.length; i++) {
+        outputArray.push(ID64toID3(listArray[i]));
+    }
+    $("#inputField").val(ArrayToList(outputArray));
+}
+
+function ConvertTo64() {
+    let txtInput = $("#inputField").val();
+    let listArray = txtInput.replace("\r", "").split("\n");
+    let outputArray = [];
+    for (let i = 0; i < listArray.length; i++) {
+        outputArray.push(ID3toID64(listArray[i]));
+    }
+    $("#inputField").val(ArrayToList(outputArray));
+}
