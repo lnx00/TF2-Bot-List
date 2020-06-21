@@ -1,4 +1,5 @@
 const TF2B_FILE_REGEX = /(tf2_bot_detector_).*(x64).*(\.zip)/
+const BIGLIST_UPDATE = "https://gist.githubusercontent.com/wgetJane/0bc01bd46d7695362253c5a2fa49f2e9/raw/playerlist.biglist.json";
 
 // Filter and Download botList.txt
 function DownloadList() {
@@ -22,7 +23,7 @@ function DownloadList() {
 function DownloadJSON() {
     $.get(BOT_LIST_URL, function (data) {
         try {
-            let jsonString = ListToTF2B(data);
+            let jsonString = ListToTF2B(data, BIGLIST_UPDATE);
             if (jsonString) { DownloadFile("playerlist.tf2bl.json", jsonString); }
         } catch (error) {
             Swal.fire({

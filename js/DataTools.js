@@ -101,13 +101,17 @@ function ListToJSON(list) {
 }
 
 // Converts List to TF2 Bot Detector
-function ListToTF2B(list) {
+function ListToTF2B(list, url = undefined) {
     if (!list) { return ""; };
 
-    //let listLines = list.replace("\r", "").split("\n");
     let listLines = FilterList(list);
     let jsonObject = new Object();
     jsonObject.$schema = TF2B_SHEMA;
+    if (url) {
+        jsonObject.file_info = {
+            update_url: url
+        };
+    }
 
     let players = [];
     for (let i = 0; i < listLines.length; i++) {
